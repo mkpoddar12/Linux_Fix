@@ -1,0 +1,38 @@
+To clear cached data from RAM on Linux, you can use the sync command to flush data to disk, followed by dropping the caches using the echo command. Please note that clearing cache might impact system performance temporarily until the caches are rebuilt. Here's how you can do it:
+
+Open a terminal on your Linux system.
+
+First, synchronize and write any pending data to disk:
+
+bash
+Copy code
+sync
+Now, drop the caches. There are three different levels for dropping caches:
+
+Level 1 (drop caches only): This will free up page cache but keep inode and dentry caches.
+
+Level 2 (drop dentries and inodes): This will free up page cache as well as inode and dentry caches.
+
+Level 3 (drop all caches): This will free up page cache, inode, and dentry caches.
+
+Choose the appropriate level based on your needs. For example, to drop all caches (level 3), use the following command:
+
+bash
+Copy code
+sudo sh -c "echo 3 > /proc/sys/vm/drop_caches"
+You need to have superuser (root) privileges to execute the echo command with redirection to /proc/sys/vm/drop_caches.
+
+Alternatively, if you only want to free up page cache (level 1), use:
+
+bash
+Copy code
+sudo sh -c "echo 1 > /proc/sys/vm/drop_caches"
+Or to free up both page cache and inode/dentry caches (level 2):
+
+bash
+Copy code
+sudo sh -c "echo 2 > /proc/sys/vm/drop_caches"
+After running the appropriate command, the cache will be cleared from RAM, and you should see an increase in available free memory. The caches will start rebuilding as your system continues to operate.
+Remember that dropping caches is generally safe and won't cause data loss since it only clears cached data, not actual data stored on disk. However, it's not recommended to do this frequently as the cache plays an essential role in improving system performance by keeping frequently accessed data readily available.
+
+If you find that your system is frequently running out of memory or experiencing high RAM usage, it's better to investigate the root cause of the issue rather than relying on clearing the cache regularly. Understanding which applications or processes are using the most RAM and optimizing or adjusting their settings can often yield better results.
