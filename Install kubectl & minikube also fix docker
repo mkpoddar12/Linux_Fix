@@ -1,0 +1,305 @@
+manish@server01:~/Downloads$ sudo apt-get update
+Get:1 http://security.ubuntu.com/ubuntu focal-security InRelease [114 kB]
+Hit:2 http://in.archive.ubuntu.com/ubuntu focal InRelease
+Get:3 http://in.archive.ubuntu.com/ubuntu focal-updates InRelease [114 kB]
+Get:4 http://in.archive.ubuntu.com/ubuntu focal-backports InRelease [108 kB]
+Fetched 336 kB in 3s (134 kB/s)   
+Reading package lists... Done
+manish@server01:~/Downloads$ 
+
+# minikube repository
+manish@server01:~/Downloads$ curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 82.4M  100 82.4M    0     0  13.7M      0  0:00:05  0:00:05 --:--:-- 16.9M
+manish@server01:~/Downloads$
+
+# Install minikube
+manish@server01:~/Downloads$ sudo install minikube-linux-amd64 /usr/local/bin/minikube
+manish@server01:~/Downloads$ 
+
+# Start minikube
+manish@server01:~/Downloads$ minikube start
+😄  minikube v1.31.1 on Ubuntu 20.04 (vbox/amd64)
+👎  Unable to pick a default driver. Here is what was considered, in preference order:
+    ▪ docker: Not healthy: "docker version --format {{.Server.Os}}-{{.Server.Version}}:{{.Server.Platform.Name}}" exit status 1: Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get "http://%2Fvar%2Frun%2Fdocker.sock/v1.24/version": dial unix /var/run/docker.sock: connect: permission denied
+    ▪ docker: Suggestion: Add your user to the 'docker' group: 'sudo usermod -aG docker $USER && newgrp docker' <https://docs.docker.com/engine/install/linux-postinstall/>
+💡  Alternatively you could install one of these drivers:
+    ▪ kvm2: Not installed: exec: "virsh": executable file not found in $PATH
+    ▪ podman: Not installed: exec: "podman": executable file not found in $PATH
+    ▪ qemu2: Not installed: exec: "qemu-system-x86_64": executable file not found in $PATH
+    ▪ virtualbox: Not installed: unable to find VBoxManage in $PATH
+
+❌  Exiting due to DRV_NOT_HEALTHY: Found driver(s) but none were healthy. See above for suggestions how to fix installed drivers.
+
+manish@server01:~/Downloads$ minikube status
+🤷  Profile "minikube" not found. Run "minikube profile list" to view all profiles.
+👉  To start a cluster, run: "minikube start"
+manish@server01:~/Downloads$ minikube start
+😄  minikube v1.31.1 on Ubuntu 20.04 (vbox/amd64)
+👎  Unable to pick a default driver. Here is what was considered, in preference order:
+    ▪ docker: Not healthy: "docker version --format {{.Server.Os}}-{{.Server.Version}}:{{.Server.Platform.Name}}" exit status 1: Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get "http://%2Fvar%2Frun%2Fdocker.sock/v1.24/version": dial unix /var/run/docker.sock: connect: permission denied
+    ▪ docker: Suggestion: Add your user to the 'docker' group: 'sudo usermod -aG docker $USER && newgrp docker' <https://docs.docker.com/engine/install/linux-postinstall/>
+💡  Alternatively you could install one of these drivers:
+    ▪ kvm2: Not installed: exec: "virsh": executable file not found in $PATH
+    ▪ qemu2: Not installed: exec: "qemu-system-x86_64": executable file not found in $PATH
+    ▪ podman: Not installed: exec: "podman": executable file not found in $PATH
+    ▪ virtualbox: Not installed: unable to find VBoxManage in $PATH
+
+❌  Exiting due to DRV_NOT_HEALTHY: Found driver(s) but none were healthy. See above for suggestions how to fix installed drivers.
+
+manish@server01:~/Downloads$ sudo apt update
+0% [Working]
+Get:1 http://security.ubuntu.com/ubuntu focal-security InRelease [114 kB]
+Hit:2 http://in.archive.ubuntu.com/ubuntu focal InRelease                               
+Hit:3 http://in.archive.ubuntu.com/ubuntu focal-updates InRelease                       
+Get:4 http://in.archive.ubuntu.com/ubuntu focal-backports InRelease [108 kB]
+Fetched 222 kB in 3s (82.7 kB/s)   
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+7 packages can be upgraded. Run 'apt list --upgradable' to see them.
+manish@server01:~/Downloads$ 
+
+# Install Docker repo
+manish@server01:~/Downloads$ sudo apt install apt-transport-https ca-certificates curl software-properties-common
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+ca-certificates is already the newest version (20230311ubuntu0.20.04.1).
+ca-certificates set to manually installed.
+curl is already the newest version (7.68.0-1ubuntu2.19).
+
+The following packages were automatically installed and are no longer required:
+  gir1.2-goa-1.0 linux-headers-5.15.0-58-generic linux-hwe-5.15-headers-5.15.0-58 linux-image-5.15.0-58-generic linux-modules-5.15.0-58-generic
+  linux-modules-extra-5.15.0-58-generic
+Use 'sudo apt autoremove' to remove them.
+The following additional packages will be installed:
+  python3-software-properties software-properties-gtk ubuntu-advantage-desktop-daemon
+The following NEW packages will be installed:
+  apt-transport-https ubuntu-advantage-desktop-daemon
+The following packages will be upgraded:
+  python3-software-properties software-properties-common software-properties-gtk
+3 upgraded, 2 newly installed, 0 to remove and 4 not upgraded.
+Need to get 126 kB of archives.
+After this operation, 304 kB of additional disk space will be used.
+Get:1 http://in.archive.ubuntu.com/ubuntu focal-updates/universe amd64 apt-transport-https all 2.0.9 [1,704 B]
+Get:2 http://in.archive.ubuntu.com/ubuntu focal-updates/main amd64 software-properties-common all 0.99.9.11 [10.4 kB]
+Get:3 http://in.archive.ubuntu.com/ubuntu focal-updates/main amd64 ubuntu-advantage-desktop-daemon amd64 1.10~20.04.1 [23.5 kB]
+Get:4 http://in.archive.ubuntu.com/ubuntu focal-updates/main amd64 software-properties-gtk all 0.99.9.11 [69.1 kB]
+Get:5 http://in.archive.ubuntu.com/ubuntu focal-updates/main amd64 python3-software-properties all 0.99.9.11 [21.6 kB]
+Fetched 126 kB in 2s (72.2 kB/s)                      
+Selecting previously unselected package apt-transport-https.
+(Reading database ... 208536 files and directories currently installed.)
+Preparing to unpack .../apt-transport-https_2.0.9_all.deb ...
+Unpacking apt-transport-https (2.0.9) ...
+Preparing to unpack .../software-properties-common_0.99.9.11_all.deb ...
+Unpacking software-properties-common (0.99.9.11) over (0.98.9.5) ...
+Selecting previously unselected package ubuntu-advantage-desktop-daemon.
+Preparing to unpack .../ubuntu-advantage-desktop-daemon_1.10~20.04.1_amd64.deb ...
+Unpacking ubuntu-advantage-desktop-daemon (1.10~20.04.1) ...
+Preparing to unpack .../software-properties-gtk_0.99.9.11_all.deb ...
+Unpacking software-properties-gtk (0.99.9.11) over (0.98.9.5) ...
+Preparing to unpack .../python3-software-properties_0.99.9.11_all.deb ...
+Unpacking python3-software-properties (0.99.9.11) over (0.98.9.5) ...
+Setting up apt-transport-https (2.0.9) ...
+Setting up python3-software-properties (0.99.9.11) ...
+Setting up ubuntu-advantage-desktop-daemon (1.10~20.04.1) ...
+ubuntu-advantage-desktop-daemon.service is a disabled or a static unit, not starting it.
+Setting up software-properties-common (0.99.9.11) ...
+Setting up software-properties-gtk (0.99.9.11) ...
+Processing triggers for dbus (1.12.16-2ubuntu2.3) ...
+Processing triggers for shared-mime-info (1.15-1) ...
+Processing triggers for desktop-file-utils (0.24-1ubuntu3) ...
+Processing triggers for mime-support (3.64ubuntu1) ...
+Processing triggers for hicolor-icon-theme (0.17-2) ...
+Processing triggers for gnome-menus (3.36.0-1ubuntu1) ...
+Processing triggers for libglib2.0-0:amd64 (2.64.6-1~ubuntu20.04.6) ...
+Processing triggers for man-db (2.9.1-1) ...
+
+manish@server01:~/Downloads$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+manish@server01:~/Downloads$ 
+
+manish@server01:~/Downloads$ echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+manish@server01:~/Downloads$
+
+
+manish@server01:~/Downloads$ sudo apt update
+Get:1 https://download.docker.com/linux/ubuntu focal InRelease [57.7 kB]
+Get:2 https://download.docker.com/linux/ubuntu focal/stable amd64 Packages [32.4 kB]                                                       
+Get:3 http://security.ubuntu.com/ubuntu focal-security InRelease [114 kB]      
+Hit:4 http://in.archive.ubuntu.com/ubuntu focal InRelease                       
+Hit:5 http://in.archive.ubuntu.com/ubuntu focal-updates InRelease
+Get:6 http://in.archive.ubuntu.com/ubuntu focal-backports InRelease [108 kB]
+Fetched 312 kB in 1s (215 kB/s)                                     
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+4 packages can be upgraded. Run 'apt list --upgradable' to see them.
+
+# Install docker
+manish@server01:~/Downloads$ sudo apt install docker-ce
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following packages were automatically installed and are no longer required:
+  bridge-utils gir1.2-goa-1.0 linux-headers-5.15.0-58-generic linux-hwe-5.15-headers-5.15.0-58 linux-image-5.15.0-58-generic linux-modules-5.15.0-58-generic
+  linux-modules-extra-5.15.0-58-generic ubuntu-fan
+Use 'sudo apt autoremove' to remove them.
+The following additional packages will be installed:
+  containerd.io docker-buildx-plugin docker-ce-cli docker-ce-rootless-extras docker-compose-plugin slirp4netns
+Suggested packages:
+  aufs-tools cgroupfs-mount | cgroup-lite
+The following packages will be REMOVED:
+  containerd docker.io runc
+The following NEW packages will be installed:
+  containerd.io docker-buildx-plugin docker-ce docker-ce-cli docker-ce-rootless-extras docker-compose-plugin slirp4netns
+0 upgraded, 7 newly installed, 3 to remove and 4 not upgraded.
+Need to get 114 MB of archives.
+After this operation, 123 MB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 https://download.docker.com/linux/ubuntu focal/stable amd64 containerd.io amd64 1.6.21-1 [28.3 MB]
+Get:2 http://in.archive.ubuntu.com/ubuntu focal/universe amd64 slirp4netns amd64 0.4.3-1 [74.3 kB]
+Get:3 https://download.docker.com/linux/ubuntu focal/stable amd64 docker-buildx-plugin amd64 0.11.2-1~ubuntu.20.04~focal [28.2 MB]
+Get:4 https://download.docker.com/linux/ubuntu focal/stable amd64 docker-ce-cli amd64 5:24.0.5-1~ubuntu.20.04~focal [13.3 MB]
+Get:5 https://download.docker.com/linux/ubuntu focal/stable amd64 docker-ce amd64 5:24.0.5-1~ubuntu.20.04~focal [22.9 MB]
+Get:6 https://download.docker.com/linux/ubuntu focal/stable amd64 docker-ce-rootless-extras amd64 5:24.0.5-1~ubuntu.20.04~focal [9,032 kB]
+Get:7 https://download.docker.com/linux/ubuntu focal/stable amd64 docker-compose-plugin amd64 2.20.2-1~ubuntu.20.04~focal [11.9 MB]
+Fetched 114 MB in 4s (29.2 MB/s)               
+(Reading database ... 208550 files and directories currently installed.)
+Removing docker.io (20.10.21-0ubuntu1~20.04.2) ...
+'/usr/share/docker.io/contrib/nuke-graph-directory.sh' -> '/var/lib/docker/nuke-graph-directory.sh'
+Removing containerd (1.6.12-0ubuntu1~20.04.3) ...
+Removing runc (1.1.4-0ubuntu1~20.04.3) ...
+Selecting previously unselected package containerd.io.
+(Reading database ... 208287 files and directories currently installed.)
+Preparing to unpack .../0-containerd.io_1.6.21-1_amd64.deb ...
+Unpacking containerd.io (1.6.21-1) ...
+Selecting previously unselected package docker-buildx-plugin.
+Preparing to unpack .../1-docker-buildx-plugin_0.11.2-1~ubuntu.20.04~focal_amd64.deb ...
+Unpacking docker-buildx-plugin (0.11.2-1~ubuntu.20.04~focal) ...
+Selecting previously unselected package docker-ce-cli.
+Preparing to unpack .../2-docker-ce-cli_5%3a24.0.5-1~ubuntu.20.04~focal_amd64.deb ...
+Unpacking docker-ce-cli (5:24.0.5-1~ubuntu.20.04~focal) ...
+Selecting previously unselected package docker-ce.
+Preparing to unpack .../3-docker-ce_5%3a24.0.5-1~ubuntu.20.04~focal_amd64.deb ...
+Unpacking docker-ce (5:24.0.5-1~ubuntu.20.04~focal) ...
+Selecting previously unselected package docker-ce-rootless-extras.
+Preparing to unpack .../4-docker-ce-rootless-extras_5%3a24.0.5-1~ubuntu.20.04~focal_amd64.deb ...
+Unpacking docker-ce-rootless-extras (5:24.0.5-1~ubuntu.20.04~focal) ...
+Selecting previously unselected package docker-compose-plugin.
+Preparing to unpack .../5-docker-compose-plugin_2.20.2-1~ubuntu.20.04~focal_amd64.deb ...
+Unpacking docker-compose-plugin (2.20.2-1~ubuntu.20.04~focal) ...
+Selecting previously unselected package slirp4netns.
+Preparing to unpack .../6-slirp4netns_0.4.3-1_amd64.deb ...
+Unpacking slirp4netns (0.4.3-1) ...
+Setting up slirp4netns (0.4.3-1) ...
+Setting up docker-buildx-plugin (0.11.2-1~ubuntu.20.04~focal) ...
+Setting up containerd.io (1.6.21-1) ...
+Setting up docker-compose-plugin (2.20.2-1~ubuntu.20.04~focal) ...
+Setting up docker-ce-cli (5:24.0.5-1~ubuntu.20.04~focal) ...
+Setting up docker-ce-rootless-extras (5:24.0.5-1~ubuntu.20.04~focal) ...
+Setting up docker-ce (5:24.0.5-1~ubuntu.20.04~focal) ...
+Processing triggers for man-db (2.9.1-1) ...
+Processing triggers for systemd (245.4-4ubuntu3.22) ...
+manish@server01:~/Downloads$ sudo systemctl start docker
+manish@server01:~/Downloads$ sudo systemctl enable docker
+Synchronizing state of docker.service with SysV service script with /lib/systemd/systemd-sysv-install.
+Executing: /lib/systemd/systemd-sysv-install enable docker
+manish@server01:~/Downloads$ 
+
+# check docker version
+manish@server01:~/Downloads$ sudo docker --version
+Docker version 24.0.5, build ced0996
+
+# Run first container
+manish@server01:~/Downloads$ sudo docker run hello-world
+Unable to find image 'hello-world:latest' locally
+latest: Pulling from library/hello-world
+719385e32844: Pull complete 
+Digest: sha256:926fac19d22aa2d60f1a276b66a20eb765fbeea2db5dbdaafeb456ad8ce81598
+Status: Downloaded newer image for hello-world:latest
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+
+#Now start minikube
+manish@server01:~/Downloads$ minikube start
+😄  minikube v1.31.1 on Ubuntu 20.04 (vbox/amd64)
+👎  Unable to pick a default driver. Here is what was considered, in preference order:
+    ▪ docker: Not healthy: "docker version --format {{.Server.Os}}-{{.Server.Version}}:{{.Server.Platform.Name}}" exit status 1: permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get "http://%2Fvar%2Frun%2Fdocker.sock/v1.24/version": dial unix /var/run/docker.sock: connect: permission denied
+    ▪ docker: Suggestion: Add your user to the 'docker' group: 'sudo usermod -aG docker $USER && newgrp docker' <https://docs.docker.com/engine/install/linux-postinstall/>
+💡  Alternatively you could install one of these drivers:
+    ▪ kvm2: Not installed: exec: "virsh": executable file not found in $PATH
+    ▪ podman: Not installed: exec: "podman": executable file not found in $PATH
+    ▪ qemu2: Not installed: exec: "qemu-system-x86_64": executable file not found in $PATH
+    ▪ virtualbox: Not installed: unable to find VBoxManage in $PATH
+
+❌  Exiting due to DRV_NOT_HEALTHY: Found driver(s) but none were healthy. See above for suggestions how to fix installed drivers.
+
+##########################
+The error message provides some suggestions to resolve this issue:
+
+Docker:
+Minikube attempted to use the Docker driver, but it failed with a permission denied error. This usually happens when your user does not have the necessary permissions to access the Docker daemon socket. The suggested solution is to add your user to the docker group, which will grant the necessary permissions. You can do this with the following command:
+
+sudo usermod -aG docker $USER && newgrp docker
+
+After running this command, you might need to log out and log back in for the group membership to take effect.
+##########################
+
+manish@server01:~/Downloads$ sudo usermod -aG docker $USER && newgrp docker
+
+# Now start minikube 
+manish@server01:~/Downloads$ minikube start
+😄  minikube v1.31.1 on Ubuntu 20.04 (vbox/amd64)
+✨  Automatically selected the docker driver. Other choices: none, ssh
+
+🧯  The requested memory allocation of 1975MiB does not leave room for system overhead (total system memory: 1975MiB). You may face stability issues.
+💡  Suggestion: Start minikube with less memory allocated: 'minikube start --memory=1975mb'
+
+📌  Using Docker driver with root privileges
+👍  Starting control plane node minikube in cluster minikube
+🚜  Pulling base image ...
+💾  Downloading Kubernetes v1.27.3 preload ...
+    > preloaded-images-k8s-v18-v1...:  393.19 MiB / 393.19 MiB  100.00% 11.59 M
+    > gcr.io/k8s-minikube/kicbase...:  447.47 MiB / 447.62 MiB  99.97% 11.24 Mi
+🔥  Creating docker container (CPUs=2, Memory=1975MB) ...\ log: exiting because of error: write /home/manish/.minikube/logs/lastStart.txt: no space left on device
+manish@server01:~/Downloads$ 
+
+# Hurrey Its working......ENJOY .....check status:
+
+manish@server01:~/Downloads$ minikube status
+E0730 22:41:13.364747   73854 status.go:260] status error: host: state: unknown state "minikube": docker container inspect minikube --format={{.State.Status}}: exit status 1
+stdout:
+
+
+stderr:
+Error response from daemon: No such container: minikube
+E0730 22:41:13.364950   73854 status.go:263] The "minikube" host does not exist!
+minikube
+type: Control Plane
+host: Nonexistent
+kubelet: Nonexistent
+apiserver: Nonexistent
+kubeconfig: Nonexistent
+
+manish@server01:
