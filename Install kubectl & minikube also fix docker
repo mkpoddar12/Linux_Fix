@@ -303,3 +303,6 @@ apiserver: Nonexistent
 kubeconfig: Nonexistent
 
 manish@server01:
+
+
+Install kubectl - https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
