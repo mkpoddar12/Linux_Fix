@@ -1,0 +1,15 @@
+Fix “system program problem detected” error in Ubuntu
+
+sudo rm /var/crash/*
+
+To disable the Apport and get rid of system crash report completely, open a terminal and use the following command to edit the Apport settings file:
+
+sudo gedit /etc/default/apport &
+The content of the file is:
+
+# set this to 0 to disable apport, or to 1 to enable it
+# you can temporarily override this with
+# sudo service apport start force_start=1
+enabled=1
+
+Change the enabled=1 to enabled=0. Save and close the file. You won’t see any pop up for crash reports after doing this. Obvious to point out that if you want to enable the crash reports again, you just need to change the same file and put enabled as 1 again.
