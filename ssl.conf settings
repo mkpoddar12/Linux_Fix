@@ -1,0 +1,64 @@
+#created below 3 files on this location:
+
+    SSLCertificateFile /etc/ssl/certs/23-24-wildcard.nebhub6.com.crt
+    SSLCertificateKeyFile /etc/ssl/private/22-24-wildcard.nebhub6.com.key
+    SSLCACertificateFile /etc/ssl/certs/22-24-wildcard.nebhub6.com.ca
+      
+============================================================================
+
+root@6ws:/etc/apache2/sites-available# ls
+000-default.conf  default-ssl.conf  zz-vhost_create-nebhub6_com.conf
+root@6ws:/etc/apache2/sites-available# vi zz-vhost_create-nebhub6_com.conf
+
+
+<VirtualHost *:80>
+    DocumentRoot "/var/www/nebhub.com/"
+    ServerName "nebhub6.com"
+    ServerAlias *.nebhub6.com
+    ServerAlias "www.nebhub6.com"
+    <Directory /var/www/nebhub.com/>
+        AllowOverride All
+        Options +FollowSymlinks
+    </Directory>
+
+    DirectoryIndex index.html index.php index.htm
+
+    # Logging
+    CustomLog /var/log/apache2/nebhub6.com-access_log combined
+    ErrorLog /var/log/apache2/nebhub6.com-error_log
+</VirtualHost>
+
+<IfModule mod_ssl.c>
+<VirtualHost *:443>
+    DocumentRoot "/var/www/nebhub.com/"
+    ServerName "nebhub6.com"
+    ServerAlias *.nebhub6.com
+    ServerAlias "www.nebhub6.com"
+    <Directory /var/www/nebhub.com/>
+        AllowOverride All
+        Options +FollowSymlinks
+    </Directory>
+
+    DirectoryIndex index.html index.php index.htm
+
+    # SSL Configuration
+    SSLEngine On
+
+    SSLCertificateFile /etc/ssl/certs/23-24-wildcard.nebhub6.com.crt
+    SSLCertificateKeyFile /etc/ssl/private/22-24-wildcard.nebhub6.com.key
+    SSLCACertificateFile /etc/ssl/certs/22-24-wildcard.nebhub6.com.ca
+
+    # Logging
+    CustomLog /var/log/apache2/nebhub6.com-ssl_access_log combined
+    ErrorLog /var/log/apache2/nebhub6.com-ssl_error_log
+</VirtualHost>
+</IfModule>
+
+
+=====================================================================
+
+a2ensite zz-vhost_create-nebhub6_com.conf
+a2enmod rewrite
+systemctl restart apache2
+
+=====================================================================
