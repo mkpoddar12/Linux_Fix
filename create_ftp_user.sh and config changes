@@ -1,0 +1,86 @@
+root@3ws:~# cat do_not_delete_sftp.sh 
+#!/bin/bash
+
+# Check if the script is being run as root
+#if [[ $EUID -ne 0 ]]; then
+#   echo "This script must be run as root" 
+#   exit 1
+#fi
+
+# Prompt for username and password
+read -p "Enter username for FTP user: " username
+read -p "Enter password for FTP user: " password
+read -p "Enter upload directory path: e.g : <<< /var/www/nebhub.com/product_images/milltekcorp/ftp_uploads/ >>> : " path
+
+# Create a new system user for FTP
+useradd -d /home/chroot/$username -s /usr/sbin/nologin -m -G sftponly $username
+
+# Set the password for the FTP user
+echo "$username:$password" | chpasswd
+
+# Set ownership and permissions for the home directory
+chown root:root /home/chroot/$username/
+
+# Create a home directory for the FTP user
+mkdir -p /home/chroot/$username/ftp_uploads
+
+
+#mount ftp_user home directory with user's upload directory
+mount --bind $path /home/chroot/$username/ftp_uploads/
+
+#add entry in fstab
+echo "$path        /home/chroot/$username/ftp_uploads/  none    bind    0       0" >> /etc/fstab
+
+#Set ownership and permissions for the ftp_upload directory
+chown $username:sftponly -R $path
+
+echo "FTP user $username created successfully."
+
+echo ":: VERIFICATIONS ::"
+id $username
+cat /etc/passwd | grep $username
+#ls -l $path | grep $username
+#removing old files from ftp_uploads directory.
+rm -rf $path*
+
+
+You have new mail in /var/mail/root
+root@3ws:~# 
+
+# Configuration changes required as below:
+===============================================
+Status:	Connecting to 162.209.73.29...
+Status:	Using username "airflowresearch_ftp". 
+Status:	Connected to 162.209.73.29
+Error:	Fatal: unable to initialise SFTP on server: could not connect
+Error:	Could not connect to server
+Status:	Waiting to retry...
+Status:	Connecting to 162.209.73.29...
+Response:	fzSftp started, protocol_version=11
+Command:	open "airflowresearch_ftp@162.209.73.29" 22
+Status:	Using username "airflowresearch_ftp". 
+Command:	Pass: ********************
+Error:	Could not connect to server
+===============================================
+
+cat /etc/ssh/sshd_config
+
+# override default of no subsystems
+#Subsystem      sftp    /usr/lib/openssh/sftp-server  # comment this line
+Subsystem sftp internal-sftp                          # Add this line to avoid login error like above
+
+Match User rack
+# PasswordAuthentication yes
+# BEGIN sftponly block
+Match Group sftponly                                  # Add this line
+    ChrootDirectory %h                                # Add this line
+    AllowTCPForwarding no                             # Add this line
+    X11Forwarding no                                  # Add this line
+    ForceCommand internal-sftp                        # Add this line
+# END sftponly block
+
+
+# Add 5 lines for the error :
+============================
+# ftp upload permission issue in File Zille
+============================
