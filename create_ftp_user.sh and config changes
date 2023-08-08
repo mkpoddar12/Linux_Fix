@@ -69,7 +69,7 @@ cat /etc/ssh/sshd_config
 #Subsystem      sftp    /usr/lib/openssh/sftp-server  # comment this line
 Subsystem sftp internal-sftp                          # Add this line to avoid login error like above
 
-Match User rack
+
 # PasswordAuthentication yes
 # BEGIN sftponly block
 Match Group sftponly                                  # Add this line
@@ -84,3 +84,5 @@ Match Group sftponly                                  # Add this line
 ============================
 # ftp upload permission issue in File Zille
 ============================
+sudo service sshd restart
+
