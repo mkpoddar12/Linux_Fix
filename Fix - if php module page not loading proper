@@ -1,0 +1,15 @@
+This `libapache2-mod-php7.4` package was missing due to that php was not loading correctly. 
+Now its working
+
+Still showing the same like HTML
+
+alok@server01:/var/www/html$ vi phpinfo.php 
+<?php
+echo phpinfo();
+?>
+
+clear cache or run on different browser
+Here I checked
+
+clear cache or run on a different browser
+Yes it works
