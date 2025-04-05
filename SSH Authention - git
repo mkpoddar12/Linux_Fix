@@ -1,0 +1,7 @@
+SSH Authentication
+-----------------------
+ssh-keygen -t ed25519 -C "mkpoddar12@gmail.com"
+WIN - Get-Content $env:USERPROFILE\.ssh\id_ed25519.pub  [ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAIJlJ7AfcwSKGQ2zgp8wLMZzTKLZUbE7opqlTezWqIo/b email]
+git push origin main    
+
+
