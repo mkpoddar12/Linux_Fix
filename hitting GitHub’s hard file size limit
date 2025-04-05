@@ -1,0 +1,32 @@
+You're hitting GitHub’s hard file size limit — it refuses to accept any file over 100 MB, and this file:
+
+.terraform/providers/registry.terraform.io/hashicorp/aws/...terraform-provider-aws_v5.94.1_x5.exe
+is 670 MB, which is way too large to push.
+
+🔥 Quick Fix (Don't push .terraform/ folder at all)
+These provider files are automatically downloaded by Terraform, so there's no need to commit them.
+
+✅ Step 1: Add .terraform/ to .gitignore
+If not already done, create or update your .gitignore file like this:
+
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.log
+crash.log
+
+✅ Step 2: Remove from Git tracking
+Run these commands to unstage and remove .terraform from Git history:
+
+git rm -r --cached .terraform/
+Then:
+
+
+git commit -m "Remove .terraform directory from Git tracking"
+
+✅ Step 3: Push again
+
+git push origin main
+
+✅ Bonus Tip: Use .gitignore at the start of every Terraform repo to avoid this in future
+Let me know if you want a full .gitignore template for Terraform projects.
